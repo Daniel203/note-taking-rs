@@ -8,3 +8,4 @@ chrono = { version = "0.4.26", features = ["serde"] }
 serde = "1.0.176"
 sqlx = "0.7.1"
 uuid = { version = "1.4.1", features = ["serde"] }
+tokio = { version = "1.29.1", features = ["full"] }

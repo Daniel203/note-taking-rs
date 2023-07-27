@@ -7,5 +7,4 @@ edition = "2021"
 shared = { path = "../shared" }
 dotenv = "0.15.0"
 sqlx = { version = "0.7.1", features = ["postgres", "runtime-tokio-rustls", "chrono", "uuid"] }
-tokio = { version = "1.29.1", features = ["full"] }
 actix-web = "4.3.1"
