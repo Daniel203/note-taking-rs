@@ -2,16 +2,13 @@ use leptos::*;
 
 #[component]
 fn App(cx: Scope) -> impl IntoView {
-    let (count, set_count) = create_signal(cx, 0);
+    let post_call = move |_| {
+        todo!()
+    };
 
     view! { cx,
-        <button
-            on:click=move |_| {
-                set_count.set(3);
-            }
-        >
-            "Click me: "
-            {move || count.get()}
+        <button on:click=post_call >
+            "Adda a reminder"
         </button>
     }
 }
