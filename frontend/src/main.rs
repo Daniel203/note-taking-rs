@@ -1,14 +1,23 @@
 use leptos::*;
+use shared::models::note::Note;
 
 #[component]
 fn App(cx: Scope) -> impl IntoView {
     let post_call = move |_| {
-        todo!()
+        let note = Note::default();
+        let client = reqwest::Client::new();
+
+        let res = client
+            .post("http://localhost:8000/api/notes")
+            .json(&note)
+            .send();
+
+        return;
     };
 
     view! { cx,
         <button on:click=post_call >
-            "Adda a reminder"
+            "Add a note"
         </button>
     }
 }

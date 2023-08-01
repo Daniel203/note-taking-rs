@@ -1,0 +1,7 @@
+CREATE TABLE note (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    title TEXT NOT NULL,
+    body TEXT NULL,
+    creation_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    last_modification_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP
+)
