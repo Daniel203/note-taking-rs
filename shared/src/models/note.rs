@@ -2,13 +2,13 @@ use super::note_tag::NoteTag;
 use serde::{Deserialize, Serialize};
 use sqlx::FromRow;
 
-#[derive(Debug, FromRow, Serialize, Deserialize)]
+#[derive(Debug, Clone, FromRow, Serialize, Deserialize)]
 pub struct Note {
     pub id: Option<uuid::Uuid>,
     pub title: String,
     pub body: Option<String>,
-    pub creation_date: Option<chrono::NaiveDate>,
-    pub last_modification_date: Option<chrono::NaiveDate>,
+    pub creation_date: Option<chrono::NaiveDateTime>,
+    pub last_modification_date: Option<chrono::NaiveDateTime>,
     // pub tag: Option<NoteTag>,
 }
 

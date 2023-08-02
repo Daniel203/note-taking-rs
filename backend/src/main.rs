@@ -1,10 +1,11 @@
+use actix_cors::Cors;
 use actix_web::{middleware::Logger, web, App, HttpResponse, HttpServer};
 use dotenv::dotenv;
 use sqlx::postgres::PgPoolOptions;
 
 pub mod api;
-pub mod repository;
 pub mod app_state;
+pub mod repository;
 
 #[actix_web::main]
 async fn main() -> Result<(), sqlx::Error> {
@@ -28,8 +29,11 @@ async fn main() -> Result<(), sqlx::Error> {
     HttpServer::new(move || {
         let logger = Logger::default();
 
+        let cors = Cors::permissive();
+
         App::new()
             .wrap(logger)
+            .wrap(cors)
             .app_data(web::Data::new(app_state::AppState { pool: pool.clone() }))
             .route("/", web::get().to(HttpResponse::Ok))
             .service(
