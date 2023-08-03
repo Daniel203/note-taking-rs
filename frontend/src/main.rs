@@ -1,5 +1,3 @@
-use std::sync::Arc;
-
 use crate::components::note_component::NoteComponent;
 use leptos::*;
 use shared::models::note::Note;
@@ -10,18 +8,21 @@ pub mod components;
 fn App(cx: Scope) -> impl IntoView {
     let (notes, set_notes) = create_signal::<Vec<Note>>(cx, vec![]);
 
-    let get_notes = create_action(cx, |_| async {
+    let get_notes = create_action(cx, move |_| async move {
         let client = reqwest::Client::new();
         let res = client.get("http://127.0.0.1:8081/api/notes").send().await;
 
-        // set_notes.clone().set(res.unwrap().json::<Vec<Note>>().await.unwrap());
+        if res.is_ok() {
+            let data = res.unwrap().json::<Vec<Note>>().await.unwrap();
+            set_notes.set(data);
+        }
     });
 
     let add_note = create_action(cx, |_| async {
         let client = reqwest::Client::new();
         let note = Note::default();
 
-        let res = client
+        let _res = client
             .post("http://127.0.0.1:8081/api/notes")
             .json(&note)
             .send()
